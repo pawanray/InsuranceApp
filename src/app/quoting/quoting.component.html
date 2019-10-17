@@ -1,0 +1,235 @@
+<div class="col-12">
+  <div class="title">
+    <i class="fa fa-calendar" aria-hidden="true"></i> Client
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <label>Agent Name</label>
+      <input
+        type="text"
+        [(ngModel)]="agentName"
+        class="form-control d-inline w-auto ml-2"
+        disabled
+      />
+    </div>
+  </div>
+</div>
+
+<form #clientForm="ngForm" (submit)="clientFormHandler(clientData)">
+  <div class="col-12 mt-3">
+    <div class="title">
+      Personal
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        <label>Name</label>
+        <input
+          type="text"
+          [(ngModel)]="clientData.basicDetail.name"
+          class="form-control"
+          name="clientName"
+        />
+      </div>
+ 
+      <div class="col-sm-3">
+        <label>Age/Birthday(mm/dd/yyyy)</label>
+        <input type="date" [(ngModel)]="clientData.basicDetail.age" class="form-control" name="age" />
+      </div>
+
+      <div class="col-sm-2">
+        <label>Gender</label>
+        <select class="form-control" [(ngModel)]="clientData.basicDetail.gender" name="gender">
+          <option *ngFor="let gender of genderArry">{{ gender.name }}</option>
+        </select>
+      </div>
+
+      <div class="col-sm-4">
+        <label>State</label>
+        <select class="form-control" [(ngModel)]="clientData.basicDetail.state" name="state">
+          <option *ngFor="let state of stateArry">{{ state.name }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 mt-3">
+        <div class="title">
+          Quote
+        </div>
+    
+        <div class="row">
+          <div class="col-sm-2">
+            <label>Solve for</label>
+            <select class="form-control" [(ngModel)]="clientData.otherDetails.sloveFor" name="slove">
+                    <option *ngFor="let solveFor of solveForArry">{{solveFor.name}}</option>
+                  </select>
+                  <!-- {{clientData.otherDetails.sloveFor |json}} -->
+          </div>
+    
+          <div class="col-sm-2">
+            <label>Face Amount</label>
+            <div class="input-group">
+            <input type="text" [(ngModel)]="clientData.basicDetail.amount" class="form-control" name="faceAmount" />
+            <span class="input-group-append" *ngIf="clientData.otherDetails.sloveFor !== 'Face'"><button type="button" (click)="openModal(template)">Select Amount</button></span>
+          </div>
+          </div>
+    
+          <div class="col-sm-2">
+            <label>Payment Mode</label>
+            <select class="form-control" [(ngModel)]="clientData.otherDetails.paymentMode" name="payment Mode">
+              <option *ngFor="let paymentMode of paymentModeArry">{{ paymentMode.name }}</option>
+            </select>
+          </div>
+    
+          <div class="col-sm-3">
+            <label class="d-block">Riders</label>
+           
+            <div class="d-inline mr-2" *ngFor="let rider of riderArry">
+                <input type="checkbox" (change)="riderOptionsHandler(rider, $event)" [value]="rider.name" [checked]="rider.isStatus" [name]="rider.name"/>&nbsp;
+                <label>{{rider.name}}</label>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+                <label>Sort Type</label>
+                <div class="input-group">
+                        <select class="form-control" [(ngModel)]="clientData.otherDetails.sortType"  name="sort Type">
+                                <option *ngFor="let sortType of sortTypeArry" [value]="sortType.name">{{ sortType.name }}</option>
+                        </select>
+                        <span class="input-group-append"><button>Select Options</button></span>
+                      </div>
+                      <!-- {{clientData.otherDetails.sortType |json}} -->
+               
+              </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-12 mt-3">
+            <div class="title">
+              Underwriting
+            </div>
+        
+            <div class="row">
+              <div class="col-sm-8">
+                <label>Underwriting class</label>
+                <div class="box-border">
+                        <input type="checkbox" value="Super-Preferred" [(ngModel)]="superPreferred" name="superPreferred"/>&nbsp;
+                        <label>Super-Preferred</label>&nbsp;
+                        <input type="checkbox" value="Preferred Plus" [(ngModel)]="preferredPlus" name="preferredPlus"/>&nbsp;
+                        <label>Preferred Plus</label>&nbsp;
+                        <input type="checkbox" value="Preferred" [(ngModel)]="preferred" name="preferred"/>&nbsp;
+                        <label>Preferred</label>&nbsp;
+                </div>
+              </div>
+        
+              <div class="col-sm-4">
+                    <label>Table Rating</label>
+                  <select class="form-control" name="tableRating" [(ngModel)]="clientData.otherDetails.tableRating">
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                  </select>
+                </div>
+             
+            </div>
+          </div> -->
+
+
+          <div class="col-12 mt-3">
+                <div class="title">
+                  Select Products
+                </div>
+            
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label>Product List</label>
+                    <div class="input-group">
+                            <select class="form-control" [(ngModel)]="clientData.otherDetails.productName" name="product">
+                                    <option  value="All Product">All Product</option>
+                                    <option  value="Prefered Product">Prefered Product</option>
+                                  </select>
+                            <span class="input-group-append"><button>Edit Product Lists</button></span>
+                      </div>
+                  </div>
+            
+                  <div class="col-sm-8">
+                        <label>Select a Product Type</label>
+                        <div class="box-border">
+
+                        <div class="d-inline mr-2" *ngFor="let productYear of productYearArry">
+                                <input type="checkbox" (change)="productYearTypeHandler(productYear,$event)"  [value]="productYear.name"   [checked]="productYear.isStatus" [name]="productYear.name"/>&nbsp;
+                                <label>{{productYear.name}}</label>
+                            </div>
+                            </div>
+                            <!-- {{productYearArry |json}} -->
+                        
+                    </div>
+                 
+                </div>
+              </div>
+
+              <div class="col-12 mt-3">
+                    <div class="title">
+                      Select Manually
+                    </div>
+                
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <label>Available Products</label>
+                        <select class="form-control" multiple [(ngModel)]="product" name="product name">
+                                <option [value]="product" *ngFor="let product of productArry">{{ product.name }}
+                                       
+                                </option>
+                              </select>
+                              <!-- {{productArry | json}} -->
+                      </div>
+                        <div class="col-sm-1 text-center">
+                            <div class="mt-3">
+                            <button type="button" class="btn btn-sm" (click)="moveLeftHandler(product)"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+                        </div>
+                        <div class="mt-2">
+                                <button type="button"  class="btn btn-sm" (click)="moveRightHandler(selectProduct)">
+                                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i></button>
+                           
+                            </div>
+                            <div class="mt-2">
+                            <button type="button"  class="btn btn-sm" (click)="moveAllProductHandler('leftAll')">
+                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                                    </div>
+                                    <div class="mt-2">
+                                    <button type="button"  class="btn btn-sm" (click)="moveAllProductHandler('rightAll')">
+                                    <i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
+                                    </div>
+
+                        </div>
+                      <div class="col-sm-6 mt-4">
+                            <select class="form-control" [(ngModel)]="selectProduct"  multiple name="selected product">
+                            <option [value]="selectProduct" *ngFor="let selectProduct of selectedProductsArry">{{ selectProduct.name }}</option>
+                            
+                          </select>
+                            <!-- {{selectedProductsArry | json}} -->
+                        </div>
+                     
+                    </div>
+                  </div>
+                  <div class="col-12 text-right">
+                  <button class="btn btn-info" type="submit">Save</button>
+                  </div>
+</form>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Premium Amount</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngFor="let faceAmount of faceAmountArry">
+        <input type="checkbox" [checked]="faceAmount.isStatus" [value]="faceAmount.name" (change)="premiumAmountHandler($event)"/> &nbsp;<label>{{faceAmount.name}}</label> &nbsp;
+    </ng-container>
+
+    <textarea type="text" class="form-control" [(ngModel)]="premiumTotalAmount" rows="3" (keyup)="premiumAmountValueHadndler(premiumTotalAmount)"></textarea>
+  </div>
+</ng-template>

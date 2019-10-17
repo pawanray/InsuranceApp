@@ -1,0 +1,16 @@
+.app-topbar{
+    background: #fbfbfb;
+    padding: 15px;
+    box-shadow: 3px 0px 5px #cecece;
+}
+.app-topbar .user-icon{
+    border: 1px solid #17a2b8;
+    color: #fff;
+    background: #17a2b8;
+    width: 25px;
+    height: 25px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+}

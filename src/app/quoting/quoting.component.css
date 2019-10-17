@@ -1,0 +1,15 @@
+.title{
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #17a2b8;
+}
+.title i{
+ margin-right: 5px;
+}
+.box-border{
+    border:1px solid #dcdcdc;
+    padding: 5px 20px;
+}
